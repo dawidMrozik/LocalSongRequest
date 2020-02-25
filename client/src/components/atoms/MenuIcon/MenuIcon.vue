@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import store from "../../../store";
+import store from '../../../store'
 
 export default {
   props: {
@@ -18,18 +18,18 @@ export default {
   },
   methods: {
     onOpen: function() {
-      store.commit("toggleSideMenu");
+      store.commit('toggleSideMenu')
     }
   },
   computed: {
     isOpen() {
-      return store.state.isSideMenuOpen;
+      return store.state.isSideMenuOpen
     }
   }
-};
+}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .menu-btn {
   display: inline-block;
   cursor: pointer;
@@ -52,7 +52,7 @@ export default {
 }
 
 .secondary {
-  background-color: #41b883;
+  background-color: $c-secondary;
 }
 
 .open .bar1 {

@@ -4,23 +4,30 @@
       v-for="song in queue"
       :key="song.id"
       :title="song.title"
-      :timeLeft="song.timeLeft"
+      :timeLeft="song.duration"
       class="song"
+      :class="{ whiteText: white }"
     />
   </div>
 </template>
 
 <script>
 import QueueSong from '../../atoms/QueueSong/QueueSong'
+import store from '@/store'
 
 export default {
+  props: {
+    white: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     QueueSong
   },
-  props: {
-    queue: {
-      type: Array,
-      default: new Array()
+  computed: {
+    queue() {
+      return store.state.queue
     }
   }
 }
@@ -29,5 +36,9 @@ export default {
 <style scoped>
 .song {
   margin-bottom: 10px;
+}
+
+.whiteText {
+  color: white;
 }
 </style>

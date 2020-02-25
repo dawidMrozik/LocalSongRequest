@@ -1,16 +1,31 @@
 const queue = []
 
-const addToQueue = song => {
-  queue.push(song)
-  return song
+const addToQueue = ({ room, song }) => {
+  queue.push({ room, song })
 }
 
-const removeFromQueue = index => {
-  return queue.splice(index, 1)[0]
+const nextSong = () => {
+  queue.shift()
 }
 
 const getSong = id => queue.find(song => song.id === id)
 
-const getQueueInRomm = room => queue.filter(song => song.room === room)
+const getQueueInRomm = room =>
+  queue.filter(song => song.room === room).map(song => song.song)
 
-module.exports = { addToQueue, removeFromQueue, getSong, getQueueInRomm }
+const setTime = ({ room, time }) => {
+  queue[room] = time
+}
+
+const getTime = room => {
+  return queue[room]
+}
+
+module.exports = {
+  addToQueue,
+  nextSong,
+  getSong,
+  getQueueInRomm,
+  setTime,
+  getTime
+}

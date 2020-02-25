@@ -1,59 +1,50 @@
 <template>
-  <input
-    class="input search"
-    type="text"
-    v-model="input"
-    @input="onSearch"
-    placeholder="szukaj..."
-  />
+  <input class="input search" type="text" v-model="input" @input="onSearch" placeholder="szukaj..." />
 </template>
 
 <script>
-import debounce from 'lodash.debounce'
-import yt from '../../../axios/yt'
-import { YT_API_KEY } from '../../../secret'
+import debounce from "lodash.debounce";
+import yt from "../../../axios/yt";
+import store from "../../../store";
 
 export default {
-  props: {
-    search: Boolean,
-    searchResults: Array
-  },
   data: function() {
     return {
-      input: ''
-    }
+      input: ""
+    };
   },
   methods: {
     onSearch: debounce(function() {
-      this.searchResults.length = 0
-      if (this.input !== '') {
-        yt.get('/', {
+      const searchResults = [];
+      if (this.input !== "") {
+        yt.get("/search", {
           params: {
-            part: 'snippet',
-            type: 'video',
-            key: YT_API_KEY,
+            part: "snippet",
+            type: "video",
             maxResults: 10,
             q: this.input
           }
         }).then(response => {
           response.data.items.forEach(video => {
-            this.searchResults.push({
+            searchResults.push({
               videoId: video.id.videoId,
               title: video.snippet.title,
               desc: video.snippet.description,
               thumbnail: video.snippet.thumbnails.medium.url
-            })
-          })
-        })
+            });
+          });
+
+          store.commit("search", searchResults);
+        });
       }
     }, 500)
   }
-}
+};
 </script>
 
 <style scoped>
 .input {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1.1em;
   border: none;
   height: 45px;

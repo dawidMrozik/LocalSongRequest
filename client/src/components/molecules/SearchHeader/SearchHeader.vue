@@ -1,6 +1,6 @@
 <template>
   <div class="search-container">
-    <SearchInput :searchResults="searchResults" />
+    <SearchInput />
     <MenuIcon />
   </div>
 </template>
@@ -13,9 +13,6 @@ export default {
   components: {
     SearchInput,
     MenuIcon
-  },
-  props: {
-    searchResults: Array
   }
 };
 </script>

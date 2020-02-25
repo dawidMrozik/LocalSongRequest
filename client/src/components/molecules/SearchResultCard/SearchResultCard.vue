@@ -4,13 +4,13 @@
     <div class="info">
       <h3>{{ title }}</h3>
     </div>
-    <PlaylistAddButton class="add" />
+    <PlaylistAddButton class="add" :videoId="videoId" />
   </div>
 </template>
 
 <script>
-import Thumbnail from '../../atoms/Thumbnail/Thumbnail.vue'
-import PlaylistAddButton from '../../atoms/PlaylistAddButton/PlaylistAddButton.vue'
+import Thumbnail from "../../atoms/Thumbnail/Thumbnail.vue";
+import PlaylistAddButton from "../../atoms/PlaylistAddButton/PlaylistAddButton.vue";
 
 export default {
   components: {
@@ -26,14 +26,14 @@ export default {
   computed: {
     shortDesc: function() {
       return this.desc.length > 250
-        ? this.desc.substring(0, 250) + '...'
-        : this.desc
+        ? this.desc.substring(0, 250) + "..."
+        : this.desc;
     }
   }
-}
+};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .card {
   display: flex;
   position: relative;
@@ -41,7 +41,7 @@ export default {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  background-color: #41b883;
+  background-color: $c-secondary;
   color: white;
   -webkit-box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.34);
   -moz-box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.34);
@@ -56,12 +56,12 @@ export default {
 }
 
 .info p {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 400;
 }
 
 .info h3 {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 700;
   font-size: 1rem;
 }

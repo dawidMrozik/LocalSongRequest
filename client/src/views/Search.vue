@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SearchHeader :searchResults="searchResults" />
+    <SearchHeader />
     <SearchResultCard
       v-for="result in searchResults"
       :key="result.videoId"
@@ -25,14 +25,12 @@ export default {
     SearchResultCard,
     SlideMenu
   },
-  data: function() {
-    return {
-      searchResults: []
-    };
-  },
   computed: {
     isOpen() {
       return store.state.isSideMenuOpen;
+    },
+    searchResults() {
+      return store.state.searchResults;
     }
   }
 };

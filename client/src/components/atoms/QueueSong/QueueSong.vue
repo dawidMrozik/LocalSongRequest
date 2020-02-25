@@ -20,15 +20,19 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Roboto' sans-serif;
+  font-family: $f-roboto;
   font-weight: 700;
-  color: #35495e;
+  color: $c-primary;
   height: 30px;
   font-size: 0.8em;
+
+  h3 {
+    width: 80%;
+  }
 }
 </style>

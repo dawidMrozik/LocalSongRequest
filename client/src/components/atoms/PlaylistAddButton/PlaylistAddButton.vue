@@ -1,12 +1,26 @@
 <template>
-  <button>playlist</button>
+  <button @click="onAddToPlaylist">playlist</button>
 </template>
 
 <script>
-export default {};
+import store from '@/store'
+
+export default {
+  props: {
+    videoId: {
+      type: String,
+      default: null
+    }
+  },
+  methods: {
+    onAddToPlaylist() {
+      store.dispatch('fetchSong', this.videoId)
+    }
+  }
+}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 button {
   font-weight: 700;
   width: 100px;
@@ -14,7 +28,7 @@ button {
   border: 1px solid #3386df;
   background-color: white;
   padding-left: 18px;
-  color: #35495e;
+  color: $c-primary;
   border-radius: 25px;
   background-image: url(../../../assets/plus.svg);
   background-position: 13% 50%;
@@ -23,7 +37,7 @@ button {
 }
 
 button:hover {
-  color: #41b883;
-  transform: scaleX(1.02);
+  color: $c-secondary;
+  transform: scale(1.1);
 }
 </style>
