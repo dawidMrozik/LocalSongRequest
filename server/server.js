@@ -41,6 +41,13 @@ io.on('connection', socket => {
     socket.broadcast.to(user.room).emit('userWantsToJoin')
   })
 
+  socket.on('updateTimer', timer => {
+    const user = getUser(socket.id)
+
+    setTime({ room: user.room, time: timer })
+    socket.broadcast.to(user.room).emit('syncTimer', timer)
+  })
+
   socket.on('sendTime', ({ time, state }) => {
     io.to(wannaJoin).emit('syncTime', { time, state })
   })
@@ -64,5 +71,5 @@ io.on('connection', socket => {
 })
 
 server.listen(PORT, () => {
-  console.log(`Server has started on port: ${PORT}`)
+  console.log(`Server is running on port: ${PORT}`)
 })

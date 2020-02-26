@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h3>{{ title }}</h3>
-    <span>{{ timeLeft }}</span>
+    <span>{{ duration }}</span>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
       type: String,
       default: null
     },
-    timeLeft: {
+    duration: {
       type: String,
       default: null
     }

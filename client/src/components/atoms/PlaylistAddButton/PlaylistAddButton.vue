@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import store from '@/store'
+import store from "../../../store";
 
 export default {
   props: {
@@ -14,10 +14,10 @@ export default {
   },
   methods: {
     onAddToPlaylist() {
-      store.dispatch('fetchSong', this.videoId)
+      store.dispatch("fetchSong", this.videoId);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

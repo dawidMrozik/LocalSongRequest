@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Thumbnail from "../../atoms/Thumbnail/Thumbnail.vue";
-import PlaylistAddButton from "../../atoms/PlaylistAddButton/PlaylistAddButton.vue";
+import Thumbnail from '../../atoms/Thumbnail/Thumbnail.vue'
+import PlaylistAddButton from '../../atoms/PlaylistAddButton/PlaylistAddButton.vue'
 
 export default {
   components: {
@@ -26,11 +26,11 @@ export default {
   computed: {
     shortDesc: function() {
       return this.desc.length > 250
-        ? this.desc.substring(0, 250) + "..."
-        : this.desc;
+        ? this.desc.substring(0, 250) + '...'
+        : this.desc
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -56,12 +56,12 @@ export default {
 }
 
 .info p {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
 }
 
 .info h3 {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 700;
   font-size: 1rem;
 }
@@ -70,5 +70,13 @@ export default {
   position: absolute;
   right: 40px;
   bottom: 15px;
+}
+
+@media screen and(min-width: 1024px) {
+  .card {
+    width: 500px;
+    height: 150px;
+    margin: 10px;
+  }
 }
 </style>

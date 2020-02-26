@@ -5,18 +5,24 @@
 </template>
 
 <script>
-import store from '@/store'
+import store from "@/store";
 
 export default {
   sockets: {
     getQueue(queue) {
-      store.commit('getQueue', queue)
+      store.commit("getQueue", queue);
     },
     newSong(song) {
-      store.commit('newSong', song)
+      store.commit("newSong", song);
+    },
+    nextSong() {
+      store.commit("nextSong");
+    },
+    syncTimer(timer) {
+      store.commit("updateTimer", timer);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

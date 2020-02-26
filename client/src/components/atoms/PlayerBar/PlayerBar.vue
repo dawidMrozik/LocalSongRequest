@@ -1,30 +1,28 @@
 <template>
   <div class="player-container">
     <div class="bar">
-      <div class="pointer" :style="{ marginLeft: progress }"></div>
+      <div class="pointer" :style="{ marginLeft: timer.progress + '%' }"></div>
     </div>
-    <div class="timer">{{ currentTime }} / {{ fullTime }}</div>
+    <div class="timer">{{ timer.current }} / {{ duration }}</div>
   </div>
 </template>
 
 <script>
+import store from '../../../store'
+
 export default {
   props: {
-    currentTime: {
+    duration: {
       type: String,
-      default: "0:00"
-    },
-    fullTime: {
-      type: String,
-      default: "0:00"
+      default: '0:00'
     }
   },
   computed: {
-    progress: function() {
-      return (this.fullTime / this.currentTime) * 200 + "px";
+    timer() {
+      return store.state.timer
     }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -32,7 +30,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: "Roboto" sans-serif;
+  font-family: 'Roboto' sans-serif;
   font-weight: 700;
   color: #35495e;
 }

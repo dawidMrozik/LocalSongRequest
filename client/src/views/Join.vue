@@ -47,9 +47,10 @@ export default {
 }
 
 .join-inner {
-  width: 80%;
+  width: 320px;
   height: 300px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   border: 5px solid $c-secondary;
   padding: 20px;

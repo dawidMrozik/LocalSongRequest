@@ -68,4 +68,10 @@ export default {
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
+
+@media screen and(min-width: 1024px) {
+  .menu-btn {
+    display: none;
+  }
+}
 </style>

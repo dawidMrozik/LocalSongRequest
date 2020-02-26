@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import yt from './axios/yt'
+import moment from 'moment'
 
 Vue.use(Vuex)
 
@@ -10,7 +11,12 @@ export default new Vuex.Store({
     room: null,
     queue: [],
     searchResults: [],
-    currentlyPlaying: null
+    currentlyPlaying: null,
+    timer: {
+      current: '0:00',
+      duration: '0:00',
+      progress: 0
+    }
   },
   mutations: {
     toggleSideMenu: function(state) {
@@ -33,6 +39,9 @@ export default new Vuex.Store({
     nextSong: function(state) {
       state.queue.shift()
       state.currentlyPlaying = state.queue[0]
+    },
+    updateTimer: function(state, timer) {
+      state.timer = timer
     }
   },
   actions: {
@@ -49,7 +58,11 @@ export default new Vuex.Store({
       const fetchedSong = {
         id: song,
         title: songInfo.snippet.title,
-        duration: songInfo.contentDetails.duration
+        duration: moment
+          .utc(
+            moment.duration(songInfo.contentDetails.duration).as('milliseconds')
+          )
+          .format('mm:ss')
       }
 
       this._vm.$socket.client.emit('addToQueue', fetchedSong)

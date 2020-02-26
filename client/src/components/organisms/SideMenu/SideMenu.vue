@@ -1,30 +1,29 @@
 <template>
-  <div class="side-menu" :class="{ open: isOpen }">
-    <div class="side-menu-header">
-      <h1>Currently playing</h1>
-      <menu-icon secondary />
-    </div>
+  <div class="side-menu" :class="{ open: isSideMenuOpen }">
+    <menu-icon secondary class="side-menu-btn" />
     <current-playing-song />
     <queue />
-    <router-link to="/player">player</router-link>
+    <FloatingButton type="player">player</FloatingButton>
   </div>
 </template>
 
 <script>
 import CurrentPlayingSong from '../../molecules/CurrentPlayingSong/CurrentPlayingSong'
+import FloatingButton from '../../atoms/FloatingButton/FloatingButton'
 import Queue from '../../molecules/Queue/Queue'
 import MenuIcon from '../../atoms/MenuIcon/MenuIcon'
+import store from '../../../store'
 
 export default {
   components: {
     CurrentPlayingSong,
     Queue,
-    MenuIcon
+    MenuIcon,
+    FloatingButton
   },
-  props: {
-    isOpen: {
-      type: Boolean,
-      default: false
+  computed: {
+    isSideMenuOpen() {
+      return store.state.isSideMenuOpen
     }
   }
 }
@@ -32,6 +31,8 @@ export default {
 
 <style lang="scss" scoped>
 .side-menu {
+  display: flex;
+  flex-direction: column;
   font-family: $f-roboto;
   font-weight: 700;
   color: $c-primary;
@@ -49,11 +50,19 @@ export default {
   transition: transform 0.5s;
 }
 
-.side-menu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+@media screen and (min-width: 1024px) {
+  .side-menu {
+    transform: translateX(0);
+    width: 35vw;
+  }
+
+  .side-menu-btn {
+    display: none;
+  }
+}
+
+.side-menu-btn {
+  align-self: flex-end;
 }
 
 .open {
