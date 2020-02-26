@@ -10,8 +10,12 @@ const nextSong = () => {
 
 const getSong = id => queue.find(song => song.id === id)
 
-const getQueueInRomm = room =>
+const getQueueInRoom = room =>
   queue.filter(song => song.room === room).map(song => song.song)
+
+const removeFromQueue = (room, id) => {
+  return getQueueInRoom(room).filter(song => song.id !== id)
+}
 
 const setTime = ({ room, time }) => {
   queue[room] = time
@@ -25,7 +29,8 @@ module.exports = {
   addToQueue,
   nextSong,
   getSong,
-  getQueueInRomm,
+  getQueueInRoom,
   setTime,
-  getTime
+  getTime,
+  removeFromQueue
 }

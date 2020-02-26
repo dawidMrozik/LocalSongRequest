@@ -6,13 +6,12 @@ const {
   addToQueue,
   nextSong,
   getSong,
-  getQueueInRomm,
+  getQueueInRoom,
   setTime,
-  getTime
+  getTime,
+  removeFromQueue
 } = require('./queue')
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./users')
-
-let { wannaJoin } = require('./users')
+const { addUser, getUser } = require('./users')
 
 const PORT = process.env.PORT || 1337
 const app = express()
@@ -26,7 +25,7 @@ io.on('connection', socket => {
   socket.on('join', room => {
     addUser({ id: socket.id, room })
     socket.join(room)
-    socket.emit('getQueue', getQueueInRomm(room))
+    socket.emit('getQueue', getQueueInRoom(room))
   })
 
   socket.on('addToQueue', song => {
@@ -35,21 +34,11 @@ io.on('connection', socket => {
     io.to(user.room).emit('newSong', song)
   })
 
-  socket.on('joinPlayer', () => {
-    const user = getUser(socket.id)
-    wannaJoin = socket.id
-    socket.broadcast.to(user.room).emit('userWantsToJoin')
-  })
-
   socket.on('updateTimer', timer => {
     const user = getUser(socket.id)
 
     setTime({ room: user.room, time: timer })
     socket.broadcast.to(user.room).emit('syncTimer', timer)
-  })
-
-  socket.on('sendTime', ({ time, state }) => {
-    io.to(wannaJoin).emit('syncTime', { time, state })
   })
 
   socket.on('nextSong', () => {
@@ -67,6 +56,12 @@ io.on('connection', socket => {
   socket.on('playing', time => {
     const user = getUser(socket.id)
     io.to(user.room).emit('playing', time)
+  })
+
+  socket.on('removeFromQueue', id => {
+    const user = getUser(socket.id)
+
+    io.to(user.room).emit('skipSong', removeFromQueue(user.room, id))
   })
 })
 

@@ -20,6 +20,9 @@ export default {
     },
     syncTimer(timer) {
       store.commit("updateTimer", timer);
+    },
+    skipSong(newQueue) {
+      store.commit("getQueue", newQueue);
     }
   }
 };

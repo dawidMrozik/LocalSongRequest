@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" @dblclick="onRemove">
     <h3>{{ title }}</h3>
     <span>{{ duration }}</span>
   </div>
@@ -15,9 +15,18 @@ export default {
     duration: {
       type: String,
       default: null
+    },
+    id: {
+      type: String,
+      default: null
+    }
+  },
+  methods: {
+    onRemove: function() {
+      this.$socket.client.emit("removeFromQueue", this.id);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -30,6 +39,12 @@ export default {
   color: $c-primary;
   height: 30px;
   font-size: 0.8em;
+  cursor: pointer;
+  user-select: none;
+
+  .container:hover {
+    color: $c-secondary-dark;
+  }
 
   h3 {
     width: 80%;

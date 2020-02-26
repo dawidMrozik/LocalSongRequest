@@ -15,7 +15,8 @@ export default new Vuex.Store({
     timer: {
       current: '0:00',
       duration: '0:00',
-      progress: 0
+      progress: 0,
+      playerTimer: 0
     }
   },
   mutations: {

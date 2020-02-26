@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import CurrentPlayingSong from '../../molecules/CurrentPlayingSong/CurrentPlayingSong'
-import FloatingButton from '../../atoms/FloatingButton/FloatingButton'
-import Queue from '../../molecules/Queue/Queue'
-import MenuIcon from '../../atoms/MenuIcon/MenuIcon'
-import store from '../../../store'
+import CurrentPlayingSong from "../../molecules/CurrentPlayingSong/CurrentPlayingSong";
+import FloatingButton from "../../atoms/FloatingButton/FloatingButton";
+import Queue from "../../molecules/Queue/Queue";
+import MenuIcon from "../../atoms/MenuIcon/MenuIcon";
+import store from "../../../store";
 
 export default {
   components: {
@@ -23,10 +23,10 @@ export default {
   },
   computed: {
     isSideMenuOpen() {
-      return store.state.isSideMenuOpen
+      return store.state.isSideMenuOpen;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

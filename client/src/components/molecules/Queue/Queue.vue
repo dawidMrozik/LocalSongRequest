@@ -3,6 +3,7 @@
     <queue-song
       v-for="song in queue"
       :key="song.id"
+      :id="song.id"
       :title="song.title"
       :duration="song.duration"
       class="song"
@@ -12,8 +13,8 @@
 </template>
 
 <script>
-import QueueSong from '../../atoms/QueueSong/QueueSong'
-import store from '../../../store'
+import QueueSong from "../../atoms/QueueSong/QueueSong";
+import store from "../../../store";
 
 export default {
   props: {
@@ -27,10 +28,10 @@ export default {
   },
   computed: {
     queue() {
-      return store.state.queue.slice(1, store.state.queue.length)
+      return store.state.queue.slice(1, store.state.queue.length);
     }
   }
-}
+};
 </script>
 
 <style scoped>
