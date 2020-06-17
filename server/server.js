@@ -5,11 +5,9 @@ const router = require('./routes')
 const {
   addToQueue,
   nextSong,
-  getSong,
   getQueueInRoom,
   setTime,
-  getTime,
-  removeFromQueue
+  removeFromQueue,
 } = require('./queue')
 const { addUser, getUser } = require('./users')
 
@@ -21,20 +19,20 @@ app.use(router)
 
 const io = socketio(server)
 
-io.on('connection', socket => {
-  socket.on('join', room => {
+io.on('connection', (socket) => {
+  socket.on('join', (room) => {
     addUser({ id: socket.id, room })
     socket.join(room)
     socket.emit('getQueue', getQueueInRoom(room))
   })
 
-  socket.on('addToQueue', song => {
+  socket.on('addToQueue', (song) => {
     const user = getUser(socket.id)
     addToQueue({ room: user.room, song })
     io.to(user.room).emit('newSong', song)
   })
 
-  socket.on('updateTimer', timer => {
+  socket.on('updateTimer', (timer) => {
     const user = getUser(socket.id)
 
     setTime({ room: user.room, time: timer })
@@ -48,17 +46,17 @@ io.on('connection', socket => {
     io.to(user.room).emit('nextSong')
   })
 
-  socket.on('pause', time => {
+  socket.on('pause', (time) => {
     const user = getUser(socket.id)
     io.to(user.room).emit('pause', time)
   })
 
-  socket.on('playing', time => {
+  socket.on('playing', (time) => {
     const user = getUser(socket.id)
     io.to(user.room).emit('playing', time)
   })
 
-  socket.on('removeFromQueue', id => {
+  socket.on('removeFromQueue', (id) => {
     const user = getUser(socket.id)
 
     io.to(user.room).emit('skipSong', removeFromQueue(user.room, id))
